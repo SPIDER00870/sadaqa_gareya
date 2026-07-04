@@ -1,0 +1,1 @@
+ضع صورة خالك داخل assets باسم photo.jpg ثم ارفع الملفات إلى GitHub Pages.

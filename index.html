@@ -34,7 +34,6 @@
             margin: 10px 0;
         }
 
-        /* ===== رأس الصفحة ===== */
         .header-icon {
             text-align: center;
             font-size: 16px;
@@ -72,7 +71,6 @@
             border-radius: 40px;
         }
 
-        /* ===== صورة المرحوم ===== */
         .photo-wrapper {
             width: 150px;
             height: 150px;
@@ -107,32 +105,30 @@
             font-weight: 700;
         }
 
-        /* ===== التواريخ ===== */
-        .dates-row {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
+        /* ===== تاريخ الوفاة فقط ===== */
+        .death-date-row {
+            text-align: center;
             margin: 6px 0 10px;
-            font-size: 14px;
+            font-size: 16px;
             color: #6f5e4e;
             font-weight: 300;
         }
 
-        .dates-row .label {
+        .death-date-row .label {
             font-weight: 500;
             color: #4a3f36;
         }
 
-        .dates-row .value {
+        .death-date-row .value {
             background: #ede5dd;
-            padding: 1px 16px;
+            padding: 2px 20px;
             border-radius: 30px;
             font-weight: 400;
-            font-size: 13px;
+            font-size: 15px;
             color: #4a3f36;
+            display: inline-block;
         }
 
-        /* ===== من نحن ===== */
         .about-line {
             text-align: center;
             font-size: 14px;
@@ -144,7 +140,6 @@
             margin: 6px 0 14px;
         }
 
-        /* ===== عناوين الأقسام ===== */
         .section-title {
             font-family: 'Amiri', serif;
             font-size: 22px;
@@ -162,7 +157,6 @@
             margin-bottom: 12px;
         }
 
-        /* ===== بطاقة الدعاء ===== */
         .dua-card {
             background: #f8f3ef;
             border-radius: 20px;
@@ -184,7 +178,6 @@
             margin: 0 4px;
         }
 
-        /* ===== أزرار الأدعية ===== */
         .dua-actions {
             display: flex;
             flex-wrap: wrap;
@@ -221,7 +214,6 @@
             background: #a68d7a;
         }
 
-        /* ===== زر الصفحة الشريفة ===== */
         .sharif-section {
             text-align: center;
             margin: 6px 0 10px;
@@ -252,7 +244,6 @@
             font-weight: 300;
         }
 
-        /* ===== سبحة إلكترونية ===== */
         .tasbeeh-section {
             background: #f8f3ef;
             border-radius: 20px;
@@ -321,7 +312,6 @@
             background: #dccfc4;
         }
 
-        /* ===== شارك الأجر ===== */
         .share-section {
             background: #f8f3ef;
             border-radius: 20px;
@@ -399,7 +389,6 @@
             background: #a68d7a;
         }
 
-        /* ===== نبذة عنه ===== */
         .bio-section {
             background: #f8f3ef;
             border-radius: 20px;
@@ -425,7 +414,6 @@
             text-align: center;
         }
 
-        /* ===== تذييل ===== */
         .footer-note {
             text-align: center;
             font-size: 14px;
@@ -441,7 +429,6 @@
             margin: 0 4px;
         }
 
-        /* ===== استجابة ===== */
         @media (max-width: 420px) {
             .container {
                 padding: 22px 14px 28px;
@@ -453,11 +440,6 @@
             .photo-wrapper {
                 width: 130px;
                 height: 130px;
-            }
-            .dates-row {
-                font-size: 12px;
-                gap: 10px;
-                flex-wrap: wrap;
             }
             .dua-card .dua-text {
                 font-size: 16px;
@@ -490,16 +472,10 @@
         <!-- <div class="initials">إ</div> -->
     </div>
 
-    <!-- ===== التواريخ ===== -->
-    <div class="dates-row">
-        <div>
-            <span class="label">تاريخ الميلاد</span>
-            <span class="value">--/--/--</span>
-        </div>
-        <div>
-            <span class="label">تاريخ الوفاة</span>
-            <span class="value">--/--/--</span>
-        </div>
+    <!-- ===== تاريخ الوفاة فقط ===== -->
+    <div class="death-date-row">
+        <span class="label">تاريخ الوفاة</span>
+        <span class="value">4 / 7 / 2025</span>
     </div>
 
     <!-- ===== من نحن ===== -->
@@ -623,7 +599,7 @@
     });
 
     // =====================================================
-    // 2. أزرار الأدعية - عرض دعاء مناسب
+    // 2. أزرار الأدعية
     // =====================================================
     const duaList = {
         'دعاء دخول القبر': 'اللهم اغفر لإيهاب وارحمه، واجعل قبره روضة من رياض الجنة',
@@ -717,7 +693,7 @@
     });
 
     // =====================================================
-    // 4. أزرار التسبيح في قسم المشاركة
+    // 4. أزرار التسبيح
     // =====================================================
     let shareCount = 0;
     document.getElementById('tasbeehShareBtn').addEventListener('click', function() {
@@ -738,7 +714,7 @@
     });
 
     // =====================================================
-    // 5. إضافة أنيميشن fadeIn و slideUp
+    // 5. أنيميشن
     // =====================================================
     const styleAnim = document.createElement('style');
     styleAnim.textContent = `
@@ -754,7 +730,7 @@
     document.head.appendChild(styleAnim);
 
     // =====================================================
-    // 6. ترحيب عند تحميل الصفحة
+    // 6. ترحيب عند التحميل
     // =====================================================
     window.addEventListener('load', function() {
         setTimeout(() => {

@@ -1,1 +1,0 @@
-let c=+localStorage.c||0;document.getElementById('c').textContent=c;function dua(){c++;localStorage.c=c;document.getElementById('c').textContent=c}let t=0;function tas(){document.getElementById('t').textContent=++t}

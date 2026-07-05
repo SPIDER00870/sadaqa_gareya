@@ -1,1 +1,772 @@
-<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>صدقة جارية</title><link rel="stylesheet" href="style.css"></head><body><div class="wrap"><img src="photo.jpg" class="photo" alt="صورة المرحوم"><h1>رحم الله خالي الغالي</h1><p>نسألكم الدعاء له بالمغفرة والرحمة.</p><section><h2>دعاء</h2><p>اللهم اغفر له وارحمه وعافه واعف عنه وأكرم نزله ووسع مدخله واجعل قبره روضة من رياض الجنة.</p></section><button onclick="dua()">🤲 دعوت له</button><p>العداد: <span id="c">0</span></p><section><h2>السبحة الإلكترونية</h2><button onclick="tas()">سبحان الله</button><p id="t">0</p></section></div><script src="script.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>المرحوم إيهاب إبراهيم محمد بنداري - رحمه الله</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: #ede5dd;
+            color: #2d2520;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 480px;
+            width: 100%;
+            background: #f5efe8;
+            border-radius: 32px;
+            padding: 30px 22px 35px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
+            border: 1px solid #e0d3c8;
+            margin: 10px 0;
+        }
+
+        /* ===== رأس الصفحة ===== */
+        .header-icon {
+            text-align: center;
+            font-size: 16px;
+            color: #b8a088;
+            letter-spacing: 10px;
+            margin-bottom: 2px;
+        }
+
+        .main-title {
+            font-family: 'Amiri', serif;
+            font-size: 26px;
+            font-weight: 700;
+            text-align: center;
+            color: #2d2520;
+            line-height: 1.5;
+        }
+
+        .main-title span {
+            display: block;
+            font-size: 16px;
+            font-weight: 300;
+            color: #8f7e6e;
+            font-family: 'Tajawal', sans-serif;
+            margin-top: 2px;
+        }
+
+        .sub-dua {
+            text-align: center;
+            font-size: 17px;
+            color: #6f5e4e;
+            margin: 6px 0 12px;
+            font-weight: 400;
+            background: #f8f3ef;
+            padding: 4px 0;
+            border-radius: 40px;
+        }
+
+        /* ===== صورة المرحوم ===== */
+        .photo-wrapper {
+            width: 150px;
+            height: 150px;
+            margin: 8px auto 14px;
+            border-radius: 50%;
+            border: 5px solid #dccfc4;
+            padding: 5px;
+            background: #fff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .photo-wrapper img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .photo-wrapper .initials {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #dccfc4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Amiri', serif;
+            font-size: 52px;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        /* ===== التواريخ ===== */
+        .dates-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 6px 0 10px;
+            font-size: 14px;
+            color: #6f5e4e;
+            font-weight: 300;
+        }
+
+        .dates-row .label {
+            font-weight: 500;
+            color: #4a3f36;
+        }
+
+        .dates-row .value {
+            background: #ede5dd;
+            padding: 1px 16px;
+            border-radius: 30px;
+            font-weight: 400;
+            font-size: 13px;
+            color: #4a3f36;
+        }
+
+        /* ===== من نحن ===== */
+        .about-line {
+            text-align: center;
+            font-size: 14px;
+            color: #8f7e6e;
+            font-weight: 300;
+            border-top: 1px solid #e0d3c8;
+            border-bottom: 1px solid #e0d3c8;
+            padding: 10px 0;
+            margin: 6px 0 14px;
+        }
+
+        /* ===== عناوين الأقسام ===== */
+        .section-title {
+            font-family: 'Amiri', serif;
+            font-size: 22px;
+            font-weight: 700;
+            text-align: center;
+            color: #2d2520;
+            margin: 14px 0 2px;
+        }
+
+        .section-sub {
+            text-align: center;
+            font-size: 14px;
+            color: #8f7e6e;
+            font-weight: 300;
+            margin-bottom: 12px;
+        }
+
+        /* ===== بطاقة الدعاء ===== */
+        .dua-card {
+            background: #f8f3ef;
+            border-radius: 20px;
+            padding: 16px 18px;
+            margin-bottom: 12px;
+            border: 1px solid #e8ddd2;
+        }
+
+        .dua-card .dua-text {
+            font-family: 'Amiri', serif;
+            font-size: 18px;
+            line-height: 1.9;
+            color: #3d352c;
+            text-align: center;
+        }
+
+        .dua-card .dua-text i {
+            color: #b8a088;
+            margin: 0 4px;
+        }
+
+        /* ===== أزرار الأدعية ===== */
+        .dua-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+            margin: 6px 0 12px;
+        }
+
+        .dua-actions .btn {
+            padding: 5px 14px;
+            border-radius: 40px;
+            border: 1px solid #dccfc4;
+            background: #fff;
+            color: #4a3f36;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .dua-actions .btn:hover {
+            background: #ede5dd;
+            border-color: #c9b09b;
+        }
+
+        .dua-actions .btn-primary {
+            background: #b8a088;
+            border-color: #b8a088;
+            color: #fff;
+        }
+
+        .dua-actions .btn-primary:hover {
+            background: #a68d7a;
+        }
+
+        /* ===== زر الصفحة الشريفة ===== */
+        .sharif-section {
+            text-align: center;
+            margin: 6px 0 10px;
+        }
+
+        .sharif-section .btn-sharif {
+            background: #b8a088;
+            border: none;
+            color: #fff;
+            padding: 8px 44px;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+            transition: 0.3s;
+        }
+
+        .sharif-section .btn-sharif:hover {
+            background: #a68d7a;
+            transform: scale(1.02);
+        }
+
+        .sharif-section .sharif-sub {
+            font-size: 12px;
+            color: #8f7e6e;
+            margin-top: 3px;
+            font-weight: 300;
+        }
+
+        /* ===== سبحة إلكترونية ===== */
+        .tasbeeh-section {
+            background: #f8f3ef;
+            border-radius: 20px;
+            padding: 16px 18px;
+            margin: 12px 0 12px;
+            text-align: center;
+            border: 1px solid #e8ddd2;
+        }
+
+        .tasbeeh-section .counter-label {
+            font-size: 14px;
+            color: #6f5e4e;
+            font-weight: 300;
+        }
+
+        .tasbeeh-section .counter-number {
+            font-family: 'Amiri', serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: #2d2520;
+            margin: 2px 0;
+            transition: 0.15s;
+        }
+
+        .tasbeeh-section .counter-sub {
+            font-size: 12px;
+            color: #8f7e6e;
+            font-weight: 300;
+        }
+
+        .tasbeeh-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tasbeeh-buttons .btn {
+            padding: 7px 28px;
+            border-radius: 40px;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .btn-tasbeeh {
+            background: #b8a088;
+            color: #fff;
+        }
+
+        .btn-tasbeeh:hover {
+            background: #a68d7a;
+            transform: scale(1.04);
+        }
+
+        .btn-reset {
+            background: #ede5dd;
+            color: #4a3f36;
+        }
+
+        .btn-reset:hover {
+            background: #dccfc4;
+        }
+
+        /* ===== شارك الأجر ===== */
+        .share-section {
+            background: #f8f3ef;
+            border-radius: 20px;
+            padding: 14px 16px;
+            margin: 12px 0;
+            text-align: center;
+            border: 1px solid #e8ddd2;
+        }
+
+        .share-section .share-text {
+            font-size: 14px;
+            color: #4a3f36;
+            font-weight: 400;
+        }
+
+        .share-section .share-text i {
+            color: #b8a088;
+            margin: 0 4px;
+        }
+
+        .share-section .share-desc {
+            font-size: 13px;
+            color: #6f5e4e;
+            font-weight: 300;
+            margin: 2px 0 6px;
+        }
+
+        .share-grid {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin: 8px 0 8px;
+            font-size: 13px;
+            color: #6f5e4e;
+        }
+
+        .share-grid span {
+            background: #fff;
+            padding: 2px 16px;
+            border-radius: 30px;
+            border: 1px solid #e0d3c8;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 6px;
+        }
+
+        .share-buttons .btn {
+            padding: 5px 28px;
+            border-radius: 40px;
+            border: 1px solid #dccfc4;
+            background: #fff;
+            color: #4a3f36;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .share-buttons .btn:hover {
+            background: #ede5dd;
+        }
+
+        .share-buttons .btn-primary {
+            background: #b8a088;
+            border-color: #b8a088;
+            color: #fff;
+        }
+
+        .share-buttons .btn-primary:hover {
+            background: #a68d7a;
+        }
+
+        /* ===== نبذة عنه ===== */
+        .bio-section {
+            background: #f8f3ef;
+            border-radius: 20px;
+            padding: 16px 20px;
+            margin: 12px 0 16px;
+            border: 1px solid #e8ddd2;
+        }
+
+        .bio-section .bio-title {
+            font-family: 'Amiri', serif;
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+            color: #2d2520;
+            margin-bottom: 4px;
+        }
+
+        .bio-section .bio-text {
+            font-size: 15px;
+            line-height: 1.9;
+            color: #4a4037;
+            font-weight: 300;
+            text-align: center;
+        }
+
+        /* ===== تذييل ===== */
+        .footer-note {
+            text-align: center;
+            font-size: 14px;
+            color: #8f7e6e;
+            font-weight: 300;
+            border-top: 1px solid #e0d3c8;
+            padding-top: 14px;
+            margin-top: 4px;
+        }
+
+        .footer-note i {
+            color: #c9b09b;
+            margin: 0 4px;
+        }
+
+        /* ===== استجابة ===== */
+        @media (max-width: 420px) {
+            .container {
+                padding: 22px 14px 28px;
+                border-radius: 24px;
+            }
+            .main-title {
+                font-size: 22px;
+            }
+            .photo-wrapper {
+                width: 130px;
+                height: 130px;
+            }
+            .dates-row {
+                font-size: 12px;
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+            .dua-card .dua-text {
+                font-size: 16px;
+            }
+            .tasbeeh-section .counter-number {
+                font-size: 34px;
+            }
+            .section-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ===== رأس الصفحة ===== -->
+    <div class="header-icon">✧ ✦ ✧</div>
+    <div class="main-title">
+        رسم الله إيهاب إبراهيم محمد بنداري
+        <span>نسألكم الدعاء له بالمغفرة والرحمة</span>
+    </div>
+    <div class="sub-dua">رحمه الله وأسكنه فسيح جناته</div>
+
+    <!-- ===== صورة المرحوم ===== -->
+    <div class="photo-wrapper">
+        <!-- ضع صورة المرحوم هنا باسم "ehab.jpg" -->
+        <img src="ehab.jpg" alt="صورة المرحوم إيهاب إبراهيم محمد بنداري" />
+        <!-- <div class="initials">إ</div> -->
+    </div>
+
+    <!-- ===== التواريخ ===== -->
+    <div class="dates-row">
+        <div>
+            <span class="label">تاريخ الميلاد</span>
+            <span class="value">--/--/--</span>
+        </div>
+        <div>
+            <span class="label">تاريخ الوفاة</span>
+            <span class="value">--/--/--</span>
+        </div>
+    </div>
+
+    <!-- ===== من نحن ===== -->
+    <div class="about-line">تترك الأثر الطيب وتدعو بالرحمة</div>
+
+    <!-- ===== دعاء للميت ===== -->
+    <div class="section-title">دعاء للميت</div>
+    <div class="section-sub">أقرأ ما تيسر من القرآن ثم ادع له</div>
+
+    <div class="dua-card">
+        <div class="dua-text">
+            <i class="fas fa-hand-peace"></i>
+            اللهم اغفر له وارحمه، وعافه واعف عنه، وأكرم نزله، ووسع مدخله، واغسله بالماء والثلج والبرد، ونقه من الذنوب والخطايا
+            <br />
+            كما ينقى الثوب الأبيض من الدنس، واجعل قبره روضة من رياض الجنة، واجمعنا به في الفردوس الأعلى.
+            <i class="fas fa-hand-peace"></i>
+        </div>
+    </div>
+
+    <!-- ===== أدعية وأذكار ===== -->
+    <div class="section-title" style="font-size:20px;">دعاء للميت</div>
+    <div class="section-sub">أدعية وأذكار للميت</div>
+
+    <div class="dua-actions">
+        <button class="btn btn-primary" data-dua="دعاء دخول القبر">دعاء دخول القبر</button>
+        <button class="btn" data-dua="دعاء لأهل الميت">دعاء لأهل الميت</button>
+        <button class="btn" data-dua="دعاء الاستغفار للميت">دعاء الاستغفار</button>
+        <button class="btn" data-dua="دعاء من القرآن الكريم">دعاء من القرآن</button>
+        <button class="btn" data-dua="أذكار عامة">أذكار عامة</button>
+    </div>
+
+    <!-- ===== الصفحة الشريفة ===== -->
+    <div class="sharif-section">
+        <button class="btn-sharif" id="sharifBtn">الصفحة الشريفة</button>
+        <div class="sharif-sub">عرض المزيد</div>
+    </div>
+
+    <!-- ===== سبحة إلكترونية ===== -->
+    <div class="section-title" style="font-size:20px;">دعوت له</div>
+    <div class="section-sub">السبحة الإلكترونية</div>
+
+    <div class="tasbeeh-section">
+        <div class="counter-label">عدد مرات الدعاء (على هذا الجهاز)</div>
+        <div class="counter-number" id="counterDisplay">0</div>
+        <div class="counter-sub">عدد مرات الدعاء (على هذا الجهاز)</div>
+
+        <div class="tasbeeh-buttons">
+            <button class="btn btn-tasbeeh" id="countBtn">
+                <i class="fas fa-hand-peace"></i> دعاء
+            </button>
+            <button class="btn btn-reset" id="resetBtn">
+                <i class="fas fa-undo"></i> إعادة
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== شارك هذا الأجر ===== -->
+    <div class="share-section">
+        <div class="share-text">
+            <i class="fas fa-share-alt"></i> شارك هذا الأجر
+        </div>
+        <div class="share-desc">شارك الموقع مع من تحب ليكون لك أجر الدعاء.</div>
+        <div class="share-grid">
+            <span>٣٣ سبحان الله</span>
+            <span>٣٣ سبحان الله</span>
+        </div>
+        <div class="share-buttons">
+            <button class="btn btn-primary" id="tasbeehShareBtn">تسبيح</button>
+            <button class="btn" id="resetShareBtn">إعادة</button>
+        </div>
+    </div>
+
+    <!-- ===== نبذة عنه ===== -->
+    <div class="bio-section">
+        <div class="bio-title">نبذة عنه</div>
+        <div class="bio-text">
+            كان المرحوم إيهاب إبراهيم محمد بنداري طيب القلب، محبا للخير، قريباً من الناس،
+            ترك وراءه أثراً طيباً في قلوب من عرفته،
+            نسأل الله أن يتقبله برحمته الواسعة.
+        </div>
+    </div>
+
+    <!-- ===== تذييل ===== -->
+    <div class="footer-note">
+        <i class="fas fa-heart"></i>
+        نسأل الله أن يجعل هذا العمل صدقة جارية في ميزان حسناته
+        <i class="fas fa-heart"></i>
+    </div>
+
+</div>
+
+<script>
+    // =====================================================
+    // 1. سبحة إلكترونية رئيسية
+    // =====================================================
+    let count = 0;
+    const counterDisplay = document.getElementById('counterDisplay');
+    const countBtn = document.getElementById('countBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    countBtn.addEventListener('click', function() {
+        count++;
+        counterDisplay.textContent = count;
+        counterDisplay.style.transform = 'scale(1.25)';
+        setTimeout(() => {
+            counterDisplay.style.transform = 'scale(1)';
+        }, 150);
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            this.style.transform = 'scale(1)';
+        }, 100);
+    });
+
+    resetBtn.addEventListener('click', function() {
+        count = 0;
+        counterDisplay.textContent = count;
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            this.style.transform = 'scale(1)';
+        }, 100);
+    });
+
+    // =====================================================
+    // 2. أزرار الأدعية - عرض دعاء مناسب
+    // =====================================================
+    const duaList = {
+        'دعاء دخول القبر': 'اللهم اغفر لإيهاب وارحمه، واجعل قبره روضة من رياض الجنة',
+        'دعاء لأهل الميت': 'اللهم أجرهم في مصيبتهم واخلفهم خيراً منها',
+        'دعاء الاستغفار للميت': 'اللهم اغفر لإيهاب وارحمه وعافه واعف عنه',
+        'دعاء من القرآن الكريم': 'رَبَّنَا اغْفِرْ لَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ',
+        'أذكار عامة': 'سبحان الله وبحمده، سبحان الله العظيم، لا إله إلا الله'
+    };
+
+    document.querySelectorAll('.dua-actions .btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const key = this.getAttribute('data-dua') || this.textContent.trim();
+            const duaText = duaList[key] || 'اللهم اغفر لإيهاب وارحمه وأدخله الجنة';
+            showDuaPopup(key, duaText);
+        });
+    });
+
+    function showDuaPopup(title, text) {
+        const oldPopup = document.querySelector('.dua-popup');
+        if (oldPopup) oldPopup.remove();
+
+        const popup = document.createElement('div');
+        popup.className = 'dua-popup';
+        popup.style.cssText = `
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeIn 0.3s ease;
+            padding: 20px;
+        `;
+
+        popup.innerHTML = `
+            <div style="
+                background: #f5efe8;
+                max-width: 400px;
+                width: 100%;
+                border-radius: 28px;
+                padding: 30px 24px 24px;
+                box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+                border: 1px solid #e0d3c8;
+                position: relative;
+                animation: slideUp 0.3s ease;
+            ">
+                <div style="font-family: 'Amiri', serif; font-size: 22px; font-weight: 700; color: #2d2520; text-align: center; margin-bottom: 4px;">
+                    ${title}
+                </div>
+                <div style="font-size: 14px; color: #8f7e6e; text-align: center; margin-bottom: 16px; border-bottom: 1px solid #e0d3c8; padding-bottom: 12px;">
+                    دعاء للميت
+                </div>
+                <div style="font-family: 'Amiri', serif; font-size: 19px; line-height: 1.9; color: #3d352c; text-align: center; padding: 8px 4px;">
+                    ${text}
+                </div>
+                <button onclick="this.closest('.dua-popup').remove()" style="
+                    display: block;
+                    margin: 18px auto 0;
+                    background: #b8a088;
+                    border: none;
+                    color: #fff;
+                    padding: 8px 36px;
+                    border-radius: 40px;
+                    font-size: 15px;
+                    font-weight: 500;
+                    cursor: pointer;
+                    font-family: 'Tajawal', sans-serif;
+                    transition: 0.3s;
+                " onmouseover="this.style.background='#a68d7a'" onmouseout="this.style.background='#b8a088'">
+                    <i class="fas fa-check"></i> تم
+                </button>
+            </div>
+        `;
+
+        document.body.appendChild(popup);
+
+        popup.addEventListener('click', function(e) {
+            if (e.target === this) this.remove();
+        });
+    }
+
+    // =====================================================
+    // 3. زر الصفحة الشريفة
+    // =====================================================
+    document.getElementById('sharifBtn').addEventListener('click', function() {
+        showDuaPopup(
+            '📜 الصفحة الشريفة',
+            'اللهم صل على محمد وعلى آل محمد، واغفر للمرحوم إيهاب إبراهيم محمد بنداري وارحمه، واجمعنا به في الفردوس الأعلى.'
+        );
+    });
+
+    // =====================================================
+    // 4. أزرار التسبيح في قسم المشاركة
+    // =====================================================
+    let shareCount = 0;
+    document.getElementById('tasbeehShareBtn').addEventListener('click', function() {
+        shareCount++;
+        const msg = shareCount <= 33 
+            ? `سبحان الله (${shareCount}/33)`
+            : `🕌 سبحان الله وبحمده (${shareCount})`;
+        showDuaPopup('تسبيح', msg);
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => { this.style.transform = 'scale(1)'; }, 100);
+    });
+
+    document.getElementById('resetShareBtn').addEventListener('click', function() {
+        shareCount = 0;
+        showDuaPopup('🔄 إعادة تعيين', 'تم إعادة تعيين عداد التسبيح');
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => { this.style.transform = 'scale(1)'; }, 100);
+    });
+
+    // =====================================================
+    // 5. إضافة أنيميشن fadeIn و slideUp
+    // =====================================================
+    const styleAnim = document.createElement('style');
+    styleAnim.textContent = `
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    `;
+    document.head.appendChild(styleAnim);
+
+    // =====================================================
+    // 6. ترحيب عند تحميل الصفحة
+    // =====================================================
+    window.addEventListener('load', function() {
+        setTimeout(() => {
+            showDuaPopup(
+                '🤲 رحمه الله',
+                'اللهم اغفر للمرحوم إيهاب إبراهيم محمد بنداري وارحمه، وأسكنه فسيح جناتك، واجمعنا به في مستقر رحمتك.'
+            );
+        }, 600);
+    });
+
+    console.log('✅ موقع المرحوم إيهاب إبراهيم محمد بنداري جاهز - رحمه الله وأسكنه فسيح جناته');
+</script>
+
+</body>
+</html>
